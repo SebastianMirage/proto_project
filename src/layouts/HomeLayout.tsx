@@ -16,7 +16,7 @@ const HomeLayout = () => {
             <div className="flex items-center justify-between px-[232px] py-10">
               <div className="flex items-center gap-4">
                 <img
-                  src="http://localhost:3845/assets/10c08ed3952818c022241f20cc644c9f61743e5e.svg"
+                  src=".\assets\OpenHealthLogo.svg"
                   alt="OpenHealth Logo"
                   className="w-12 h-12"
                 />
