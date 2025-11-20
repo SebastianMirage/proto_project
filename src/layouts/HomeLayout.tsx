@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Footer from "@/persistants/Footer";
+import OpenLogo from "../assets/OpenHealthLogo.svg";
 
 const HomeLayout = () => {
   return (
@@ -16,7 +17,7 @@ const HomeLayout = () => {
             <div className="flex items-center justify-between px-[232px] py-10">
               <div className="flex items-center gap-4">
                 <img
-                  src=".\assets\OpenHealthLogo.svg"
+                  src={OpenLogo}
                   alt="OpenHealth Logo"
                   className="w-12 h-12"
                 />

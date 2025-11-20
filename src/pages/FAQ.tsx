@@ -4,6 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Card } from "@/components/ui/card";
+import OpenLogo from "../assets/OpenHealthLogo.svg";
 
 const FAQ = () => {
 
@@ -12,7 +14,7 @@ const FAQ = () => {
       <div className="bg-white px-64 py-28 grid grid-cols-2 gap-8">
         <div className="items-center">
           <h1 className="text-4xl text-center">Preguntas Frecuentes</h1>
-          <div className="mt-22">
+          <div className="mt-12">
             <Accordion type="single" collapsible className="w-full max-w-xl">
               <AccordionItem value="item-1">
                 <AccordionTrigger>¿Qué es OpenHealth?</AccordionTrigger>
@@ -115,10 +117,11 @@ const FAQ = () => {
         </div>
 
         <div className="self-center">
-          <div
-            className="h-86 w-full bg-main mt-22 border-r-8 border-b-8 border-l-2 border-t-2 border-black border-rounded-lg bg-[url('.\assets\OpenHealthLogo.svg')] bg-center bg-no-repeat bg-contain flex items-center justify-center"
-          >
-          </div>
+          <div className="my-6">
+              <Card className="w-full h-56 flex items-center justify-center">
+                <img className="w-42" src={OpenLogo} alt="logo" />
+              </Card>
+            </div>
         </div>
       </div>
     </>

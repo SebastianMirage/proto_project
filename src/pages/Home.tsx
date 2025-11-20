@@ -1,18 +1,18 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Badge } from '@/components/ui/badge'
-
-const imgCardiology1 = "http://localhost:3845/assets/08dfbfc969c6182482f9ba7b803589035a1bf8c8.svg";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import OpenLogo from "../assets/OpenHealthLogo.svg";
 
 function Home() {
   return (
-    <div className="bg-white min-h-screen py-52">
-
+    <div className="bg-white min-h-screen py-12">
       {/* Status Bar */}
       <div className="px-[232px] mb-12">
-        <Badge variant="neutral">Lorem ipsum sit dolorem • Now Live in VANA</Badge>
+        <Badge variant="neutral">
+          Lorem ipsum sit dolorem • Now Live in VANA
+        </Badge>
       </div>
-      
 
       {/* Hero Section */}
       <section className="px-[232px] mb-20">
@@ -24,43 +24,35 @@ function Home() {
         </p>
         <div className="flex justify-start">
           <Button className="hover:cursor-pointer">
-            <Link to="/getstarted">
-              Empezar
-            </Link>
+            <Link to="/getstarted">Empezar</Link>
           </Button>
         </div>
       </section>
 
       {/* Why Section */}
-      <section className="px-[232px] mb-20">
-        <h3 className="text-4xl font-semibold text-black mb-4 text-center">
-          ¿Por qué OpenHealth?
-        </h3>
-        <p className="text-2xl text-gray-500 text-center mb-12">
-          Lorem ipsum sit dolorem
-        </p>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-2 gap-12">
-          {/* Card 1 */}
-          <div className="flex flex-col items-end">
-            <div className="w-full bg-gray-300 rounded-3xl h-64 mb-4 flex items-center justify-center">
-              <img src={imgCardiology1} alt="Feature Icon" className="w-56 h-56" />
-            </div>
-            <p className="text-xl font-medium text-black">Lorem ipsum sit dolorem</p>
+      <div className="px-[232px] place-items-center">
+        <div className="grid grid-cols-[1.5fr_2fr] gap-12">
+          <div className="">
+            <h1 className="text-center font-bold text-3xl my-6">¿Por qué OpenHealth?</h1>
+            <h2 className="text-center font-bold text-xl my-4 text-gray-500">Lorem ipsum dolor sit amet consectetur</h2>
           </div>
-
-          {/* Card 2 */}
-          <div className="flex flex-col items-end">
-            <div className="w-full bg-gray-300 rounded-full h-64 mb-4 flex items-center justify-center" style={{ borderRadius: '48px' }}>
-              <img src={imgCardiology1} alt="Feature Icon" className="w-56 h-56" />
+          <div className="">
+            <div className="my-6">
+              <Card className="w-full">
+                <img className="w-20 self-center" src={OpenLogo} alt="logo" />
+              </Card>
             </div>
-            <p className="text-xl font-medium text-black">Lorem ipsum sit dolorem</p>
+            <div className="my-6">
+              <Card className="w-full">
+                <img className="w-20 self-center" src={OpenLogo} alt="logo" />
+              </Card>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
