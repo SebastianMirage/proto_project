@@ -31,21 +31,38 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { toast } from "sonner";
+import { CheckCircle2Icon } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const Productos = () => {
-
   const [sliderValue, setSliderValue] = useState<number[]>([33]);
+  // const [cantidadValue, setCantidadValue] = useState<string>("");
+  // const [origenValue, setOrigenValue] = useState<string>("");
+  const [qualityIndexValue, setQualityIndexValue] = useState<number>(0);
+  const [precioMercadoValue, setPrecioMercadoValue] = useState<number>(0);
+  const [alertVisible, setAlertVisible] = useState<boolean>(false);
+  const [total, setTotal] = useState<number>(0);
 
   function handleSlider(value: number[]) {
     setSliderValue(value);
     console.log(value);
   }
 
+  function handleCalc() {
+    const calculatedTotal =
+      qualityIndexValue * precioMercadoValue * sliderValue[0];
+    setTotal(calculatedTotal);
+    setAlertVisible(!alertVisible);
+    console.log(qualityIndexValue, precioMercadoValue);
+    // alert(`El valor neto de tus datos es: $${total.toFixed(2)} USD`);
+  }
+
   return (
     <>
       <div className="w-full min-h-screen bg-white flex py-12 justify-center">
-        <div>
-          <Card className="w-full max-w-sm">
+        <div className="w-full max-w-lg">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Número de tokens</CardTitle>
               <CardDescription>
@@ -55,13 +72,21 @@ const Productos = () => {
             <CardContent>
               <div>
                 <h3 className="font-bold self-center">{sliderValue} OPH</h3>
-                <Slider defaultValue={[33]} max={100} step={1} onValueChange={handleSlider}/>
+                <Slider
+                  defaultValue={[33]}
+                  max={100}
+                  step={1}
+                  onValueChange={handleSlider}
+                />
               </div>
             </CardContent>
             <CardFooter className="flex-col gap-2">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="neutral" className="w-full">
+                  <Button
+                    variant="neutral"
+                    className="w-full hover:cursor-pointer"
+                  >
                     Ajustes
                   </Button>
                 </SheetTrigger>
@@ -92,11 +117,19 @@ const Productos = () => {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Dispositivos</SelectLabel>
-                            <SelectItem value="pixelwatch">PixelWatch</SelectItem>
-                            <SelectItem value="applewatch">AppleWatch</SelectItem>
-                            <SelectItem value="galaxywatch">GalaxyWatch</SelectItem>
+                            <SelectItem value="pixelwatch">
+                              PixelWatch
+                            </SelectItem>
+                            <SelectItem value="applewatch">
+                              AppleWatch
+                            </SelectItem>
+                            <SelectItem value="galaxywatch">
+                              GalaxyWatch
+                            </SelectItem>
                             <SelectItem value="fitbit">Fitbit</SelectItem>
-                            <SelectItem value="xiaomimiband">Xiaomi miBand</SelectItem>
+                            <SelectItem value="xiaomimiband">
+                              Xiaomi miBand
+                            </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -107,6 +140,10 @@ const Productos = () => {
                         id="sheet-demo-username"
                         placeholder="0.5"
                         type="number"
+                        value={qualityIndexValue}
+                        onChange={(e) => {
+                          setQualityIndexValue(Number(e.target.value));
+                        }}
                       />
                     </div>
                     <div className="grid gap-3">
@@ -117,20 +154,51 @@ const Productos = () => {
                         id="sheet-demo-username"
                         placeholder="0.05"
                         type="number"
+                        value={precioMercadoValue}
+                        onChange={(e) => {
+                          setPrecioMercadoValue(Number(e.target.value));
+                        }}
                       />
                     </div>
                   </div>
                   <SheetFooter>
-                    <Button type="submit">Guardar cambios</Button>
+                    <Button
+                      type="submit"
+                      className="hover:cursor-pointer"
+                      onClick={() => toast.success("Cambios guardados")}
+                    >
+                      Guardar cambios
+                    </Button>
                     <SheetClose asChild>
-                      <Button variant="neutral">Cerrar</Button>
+                      <Button
+                        variant="neutral"
+                        className="hover:cursor-pointer"
+                      >
+                        Cerrar
+                      </Button>
                     </SheetClose>
                   </SheetFooter>
                 </SheetContent>
               </Sheet>
-              <Button type="submit" className="w-full">
+              <Button
+                type="submit"
+                className="w-full hover:cursor-pointer"
+                onClick={() => handleCalc()}
+              >
                 Calcular
               </Button>
+              {alertVisible && (
+                <Alert>
+                  <CheckCircle2Icon />
+                  <AlertTitle>
+                    ¡Hecho! el valor neto de tus datos es de ${total.toFixed(2)}
+                  </AlertTitle>
+                  <AlertDescription>
+                    Este es un cálculo aproximado basado en los parámetros que
+                    suministró.
+                  </AlertDescription>
+                </Alert>
+              )}
               <div className="mt-4 text-center text-sm">
                 ¿No tienes $OPH? <Link to="/getstarted">Empieza aquí</Link>
               </div>
